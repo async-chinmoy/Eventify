@@ -8,6 +8,7 @@ import authRoutes from "./routes/auth.route.js"
 import eventRoutes from "./routes/event.route.js"
 import cookieParser from "cookie-parser";
 import { protectAuth } from "./middlewares/protectAuth.js";
+import userRoutes from "./routes/user.router.js"
 
 const PORT = process.env.PORT || 3000
 const app = express();
@@ -17,8 +18,10 @@ app.use(express.urlencoded({extended:true}))
 app.use(cookieParser())
 
 
+
 app.use('/api/auth',authRoutes)
 app.use('/api/events',protectAuth,eventRoutes)
+app.use('/api/user',protectAuth,userRoutes)
 
 
 
