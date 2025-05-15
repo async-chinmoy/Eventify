@@ -7,8 +7,8 @@ export const getUser = async (req, res) => {
   res.status(200).send({ user });
 };
 
-export const register = async (req, res) => {
-  const userId = req.user?.id ;
+export const registerEvent = async (req, res) => {
+  const userId = req.user?.id;
   const { id } = req.params;
 
   if (!userId) {
@@ -16,33 +16,25 @@ export const register = async (req, res) => {
   }
 
   try {
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).send({ error: "User not found" });
+    }
     const event = await Event.findById(id);
     if (!event) {
-      return res.status(400).send({ error: "Event does not exist" });
-    }
-    const registerCheck = await Register.findOne({
-      user: userId,
-      event: event._id,
-    });
-
-    if (registerCheck) {
-      return res.status(400).send({
-        error: "You have already registered for this event",
-        registerCheck,
-      });
+      return res.status(404).send({ error: "Event not found" });
     }
 
-    const newRegister = new Register({
-      user: userId,
-      event: event._id,
-      enrolled: true,
-    });
+    if (user.enrolledEvents.includes(id)) {
+      return res
+        .status(400)
+        .send({ error: "User is already registered for this event",event});
+    }
 
-    await newRegister.save();
-    res.status(200).send({
-      message: "You have registered for the event successfully",
-      newRegister,
-    });
+    user.enrolledEvents.push(id);
+    await user.save();
+
+    res.status(200).send({ message: "Event registered successfully",event });
   } catch (error) {
     console.log(error);
     res.status(500).send({ error: "Something went wrong" });
