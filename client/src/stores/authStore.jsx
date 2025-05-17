@@ -10,7 +10,7 @@ const useAuthStore = create((set) => ({
   login: async (userData) => {
     try {
       const res = await axiosInstance.post("/auth/login", userData)
-      const user = res.data.user
+      const user = res.data.newUser
       set({
         loading: true,
         user: user,

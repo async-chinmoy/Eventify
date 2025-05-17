@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import useAuthStore from '../stores/authStore'; // Adjust the path
 
-const Login = () => {
+const Signup = () => {
   const [formData, setFormData] = useState({
-    username: '',
+    name: '',
     email: '',
     password: ''
   });
-  const { email, password, username } = formData;
+  const { email, password, name } = formData;
   const { isAuth, signup } = useAuthStore();
   const navigate = useNavigate();
 
@@ -27,7 +27,7 @@ const Login = () => {
     setFormData({
       email: '',
       password: '',
-      username: ''
+      name: ''
     })
   };
 
@@ -45,12 +45,12 @@ const Login = () => {
 
 
           <div>
-            <label htmlFor="Username" className="block text-sm text-gray-400">Username</label>
+            <label htmlFor="Name" className="block text-sm text-gray-400">Name</label>
             <input
               type="text"
               className="w-full mt-1 px-4 py-2 bg-gray-800 border border-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-violet-500"
-              value={username}
-              name='username'
+              value={name}
+              name='name'
               onChange={handleChange}
               placeholder="Enter your username  "
             />
@@ -82,7 +82,7 @@ const Login = () => {
               <Link to={'/forgot-password'} className="hover:underline">Forgot Password?</Link>
             </div>
           </div>
-          
+
           <button
             type="submit"
             className="w-full py-2 mt-2 bg-violet-500 hover:bg-violet-600 text-white font-semibold rounded transition"
@@ -92,11 +92,11 @@ const Login = () => {
         </form>
 
         <div className="mt-6 text-center text-sm text-gray-400">
-          Don’t have an account? <Link to={'/login'} className="text-violet-400 hover:underline">Login</Link>
+          Already have an account? <Link to={'/login'} className="text-violet-400 hover:underline">Login</Link>
         </div>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default Signup;
