@@ -27,7 +27,7 @@ export const signup = async (req, res) => {
     const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);
     res.cookie("token", token);
 
-    res.status(201).send({ message: "User created successfully", user, token });
+    res.status(201).send({ message: "User created successfully", newUser, token });
   } catch (error) {
     console.log(error);
   }
