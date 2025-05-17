@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import useAuthStore from "../stores/AuthStore";
+import useAuthStore from "../stores/authStore";
 import { useEffect } from "react";
 
 export const ProtectedRoutes = ({ children }) => {
