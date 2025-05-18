@@ -2,12 +2,12 @@
 import Navbar from '../components/Navbar'
 import { IoSearch } from 'react-icons/io5'
 import image from '../assets/image.svg'
-import Card from '../components/Card'
-import { use, useEffect } from 'react'
+import { useEffect } from 'react'
 import useAuthStore from '../stores/authStore'
 
 import Events from '../components/Events'
 import { redirect } from 'react-router-dom'
+import Footer from '../components/Footer'
 
 const Home = () => {
 
@@ -52,15 +52,9 @@ const Home = () => {
         </h1>
 
       </span>
-      <div className='relative '>
         <Events />
-      </div>
 
-
-
-
-
-
+      <Footer/>
       <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem]"><div className="absolute bottom-0 left-0 right-0 top-0 bg-[radial-gradient(circle_800px_at_100%_200px,#d5c5ff,transparent)]"></div></div>
     </div>
   )

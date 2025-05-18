@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Home from './pages/Home'
+import EventDetails from './pages/EventDetails'
 
 import { ProtectedRoutes } from './services/ProtectedRoutes'
 import useAuthStore from './stores/authStore'
@@ -37,7 +38,9 @@ const App = () => {
         <Route path="/signup" element={<Signup />} />
 
         <Route path="/" element={<ProtectedRoutes><Home /></ProtectedRoutes>} />
-        <Route path="/home" element={<ProtectedRoutes><Home /></ProtectedRoutes>} />
+        <Route path="/home" element={<ProtectedRoutes><Home /></ProtectedRoutes>} />        
+        <Route path="/event/:id" element={<ProtectedRoutes><EventDetails /></ProtectedRoutes>} />        
+
 
       </Routes>
       <ToastContainer />
