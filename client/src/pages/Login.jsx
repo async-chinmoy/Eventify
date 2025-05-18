@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import useAuthStore from '../stores/authStore'; // Adjust the path
+import useAuthStore from '../stores/authStore'; 
+import {  toast } from 'react-toastify';
+
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -20,7 +22,8 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const res = await login(formData)
-    if(res){
+    if(res.success){
+      toast.success("Login successful")
       navigate('/home');
     }
     setFormData({

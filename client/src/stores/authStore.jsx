@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { axiosInstance } from "../services/Axios";
-
+import Cookie from "js-cookie";
+import { toast } from "react-toastify";
 const useAuthStore = create((set) => ({
   isAuth: false,
   error: null,
@@ -17,8 +18,10 @@ const useAuthStore = create((set) => ({
         isAuth: true,
         error: null,
       })
+      return {success: true}
     } catch (error) {
-      alert(error.response.data.message)
+      toast.error(error?.response?.data?.error)
+      return { success : false}
     }
   },
 
@@ -39,32 +42,38 @@ const useAuthStore = create((set) => ({
         user: user,
         isAuth: true,
         error: null
-      })      
+      })
     } catch (error) {
       alert(error.response.data.message)
       console.log(error)
     }
   }
-   ,
+  ,
 
   checkAuth: async () => {
+
+    const token = Cookie.get("token")
     try {
-      const res = await axiosInstance.get("/auth/verify");
-      set({
-        loading: false,
-        user: res.data.user,
-        isAuth: true,
-        error: null,
-      });
+      if(token){
+        const res = await axiosInstance.get("/auth/verify")
+        const user = res.data.user
+        set({
+          
+          user: user,
+          isAuth: true,
+          error: null
+        })
+      }
     } catch (error) {
       set({
         loading: false,
         user: null,
         isAuth: false,
-        error: null,
-      });
+        error: null
+      })
     }
-  },
+  }
+
 }));
 
 export default useAuthStore;
