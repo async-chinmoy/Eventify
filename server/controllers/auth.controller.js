@@ -2,12 +2,16 @@ import express from "express";
 import User from "../models/user.model.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-
+import validator from "validator";
 export const signup = async (req, res) => {
   const { name, email, password } = req.body;
   try {
     if (!name || !email || !password) {
       return res.status(400).send({ error: "Please fill all the fields" });
+    }
+
+    if (!validator.isEmail(email)) {
+      return res.status(400).json({ error: "Invalid email" });
     }
 
     const userCheck = await User.findOne({ email });
@@ -27,7 +31,9 @@ export const signup = async (req, res) => {
     const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);
     res.cookie("token", token);
 
-    res.status(201).send({ message: "User created successfully", newUser, token });
+    res
+      .status(201)
+      .send({ message: "User created successfully", newUser, token });
   } catch (error) {
     console.log(error);
   }
@@ -66,5 +72,5 @@ export const logout = (req, res) => {
     expires: new Date(Date.now()),
     httpOnly: true,
   });
-  res.status(200).send({ message: "User logged out successfully"});
+  res.status(200).send({ message: "User logged out successfully" });
 };

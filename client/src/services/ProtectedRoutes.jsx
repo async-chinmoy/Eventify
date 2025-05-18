@@ -8,7 +8,7 @@ export const ProtectedRoutes = ({ children }) => {
 
     useEffect(() => {
         if (!isAuth) {
-            navigate('/login');
+            navigate('/signup');
         }
     }, [isAuth, navigate]);
 

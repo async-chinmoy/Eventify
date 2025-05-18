@@ -1,8 +1,15 @@
 import logo from "../assets/logo.svg"
-import { Link } from "react-router-dom"
+import { Link} from "react-router-dom"
 import { MdOutlineAccountCircle } from "react-icons/md";
+import { IoLogOut } from "react-icons/io5";
+import useAuthStore from "../stores/authStore";
 
 const Navbar = () => {
+    const {logout} = useAuthStore();
+
+    const handleLogout =() =>{
+        logout();
+    }
     return (
 
         <nav className="h-20 w-full flex items-center justify-between px-12 bg-white  drop-shadow-xl/25 ">
@@ -31,6 +38,9 @@ const Navbar = () => {
                     </li>
                 </ul>
                 <MdOutlineAccountCircle className="text-2xl" />
+                <button onClick={handleLogout}>
+                     <IoLogOut className="text-3xl cursor-pointer"  />
+                </button>
             </div>
         </nav>
     )

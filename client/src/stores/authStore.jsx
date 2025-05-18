@@ -18,22 +18,30 @@ const useAuthStore = create((set) => ({
         isAuth: true,
         error: null,
       })
-      return {success: true}
+      return { success: true }
     } catch (error) {
       toast.error(error?.response?.data?.error)
-      return { success : false}
+      return { success: false }
     }
   },
 
-  logout: () =>
-    set({
-      loading: false,
-      user: null,
-      isAuth: false,
-      error: null,
-    }),
+  logout: async () =>{
+    try {
+      const res = await axiosInstance.post('/auth/logout')
+      const user = res.data.user
+      set({
+        loading: false,
+        user: null,
+        isAuth: false,
+        error: null
+      })
+    } catch (error) {
+      toast.error(error?.response?.data?.error)
+    }
+  }
+    ,
 
-  signup: async (userData) =>{
+  signup: async (userData) => {
     try {
       const res = await axiosInstance.post("/auth/signup", userData)
       const user = res.data.user
@@ -43,9 +51,10 @@ const useAuthStore = create((set) => ({
         isAuth: true,
         error: null
       })
+      return { success: true }
     } catch (error) {
-      alert(error.response.data.message)
-      console.log(error)
+      toast.error(error?.response?.data?.error)
+      return { success: false }
     }
   }
   ,
@@ -54,11 +63,11 @@ const useAuthStore = create((set) => ({
 
     const token = Cookie.get("token")
     try {
-      if(token){
+      if (token) {
         const res = await axiosInstance.get("/auth/verify")
         const user = res.data.user
         set({
-          
+
           user: user,
           isAuth: true,
           error: null

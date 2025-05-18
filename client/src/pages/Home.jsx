@@ -11,10 +11,11 @@ import { redirect } from 'react-router-dom'
 
 const Home = () => {
 
-  const { user } = useAuthStore()
-  useEffect(()=>{
+  const user = useAuthStore((state) => state.user);
+
+  useEffect(() => {
     redirect('/home')
-  },[user])
+  }, [user])
 
   return (
     <div className='min-h-screen '>
@@ -32,11 +33,11 @@ const Home = () => {
 
         <div className='w-4/5 h-96 mt-2 rounded-3xl flex justify-between  items-center bg-purple-200'>
           <div className='w-1/2 flex flex-col justify-center items-start gap-4 p-10 '>
-           
+
             <span className='text-4xl font-bold bg-purple-400 px-5 py-2 rounded-xl'>
               {user?.name ? `Welcome Back ${user.name}` : 'Welcome to Eventify'}
             </span>
-            
+
             <p className='text-sm text-grey-600 font-semibold'>We’ve got fresh events, exclusive experiences, and everything in between waiting for you. Dive back in and make the most of what’s coming up....</p>
           </div>
           <img className='w-1/2' src={image} alt="image" />
@@ -45,8 +46,11 @@ const Home = () => {
 
       </section>
 
-      <span className='flex justify-start items-center mx-16'>
-        <h1 className='text-3xl font-bold text-center mt-10 pb-6'>Upcoming Events</h1>
+      <span className='flex  justify-start items-center mx-16'>
+        <h1 className='text-3xl font-bold text-center mt-10 pb-6'>Upcoming Events
+          <div className='h-0.5 w-full bg-gray-800 mt-3 rounded-2xl '></div>
+        </h1>
+
       </span>
       <div className='relative '>
         <Events />
