@@ -12,7 +12,7 @@ const Navbar = () => {
     }
     return (
 
-        <nav className="h-20 w-full flex items-center justify-between px-12 bg-white  drop-shadow-xl/25 ">
+        <nav className="h-20 w-full flex items-center justify-between px-12 bg-white sticky top-0 z-10 drop-shadow-xl/25 ">
             <span className="flex items-center gap-6">
                 <img className="w-20" src={logo} alt="logo" />
                 <h1 className="text-3xl font-bold  tracking-widest">Evently</h1>

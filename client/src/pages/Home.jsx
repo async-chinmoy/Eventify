@@ -5,9 +5,10 @@ import image from '../assets/image.svg'
 import { useEffect } from 'react'
 import useAuthStore from '../stores/authStore'
 
-import Events from '../components/Events'
+import EventsCarousel from '../components/EventsCarousel'
 import { redirect } from 'react-router-dom'
 import Footer from '../components/Footer'
+import Categories from '../components/Categories'
 
 const Home = () => {
 
@@ -19,8 +20,6 @@ const Home = () => {
 
   return (
     <div className='min-h-screen '>
-      <Navbar />
-
       <section className='flex relative flex-col  justify-center items-center mx-auto '>
         <div className='flex gap-4 items-center justify-center border rounded-full px-4 cursor-pointer  mt-5 '>
           <input type="text"
@@ -47,15 +46,24 @@ const Home = () => {
       </section>
 
       <span className='flex  justify-start items-center mx-16'>
-        <h1 className='text-3xl font-bold text-center mt-10 pb-6'>Upcoming Events
+        <h1 className='text-3xl font-bold text-center mt-5 pb-6'>Upcoming Events
           <div className='h-0.5 w-full bg-gray-800 mt-3 rounded-2xl '></div>
         </h1>
 
       </span>
-        <Events />
+      <EventsCarousel />
 
-      <Footer/>
-      <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem]"><div className="absolute bottom-0 left-0 right-0 top-0 bg-[radial-gradient(circle_800px_at_100%_200px,#d5c5ff,transparent)]"></div></div>
+      <section className='flex flex-col justify-center items-center mx-16 mt-20 mx-auto'>
+        <span className='text-4xl font-bold pb-3'>Events Categories
+          <div className='h-0.5 w-full bg-gray-800 mt-3 rounded-2xl '></div>
+        </span>
+
+        <p className='text-normal w-4/5 mt-5 text-grey-600 font-semibold'>Eventify lets users discover events by category, making it easy to browse tech, cultural, sports, or workshop events. Just select a category to view relevant listings instantly....</p>
+        <Categories />
+      </section>
+
+      <Footer />
+
     </div>
   )
 }

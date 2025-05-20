@@ -25,26 +25,12 @@ const useAuthStore = create((set) => ({
     }
   },
 
-  logout: async () =>{
-    try {
-      const res = await axiosInstance.post('/auth/logout')
-      const user = res.data.user
-      set({
-        loading: false,
-        user: null,
-        isAuth: false,
-        error: null
-      })
-    } catch (error) {
-      toast.error(error?.response?.data?.error)
-    }
-  }
-    ,
+  
 
   signup: async (userData) => {
     try {
       const res = await axiosInstance.post("/auth/signup", userData)
-      const user = res.data.user
+      const user = res.data.newUser
       set({
         loading: true,
         user: user,
@@ -58,6 +44,22 @@ const useAuthStore = create((set) => ({
     }
   }
   ,
+    logout: async () =>{
+    try {
+      const res = await axiosInstance.post('/auth/logout')
+      const user = res.data.user
+      set({
+        loading: false,
+        user: null,
+        isAuth: false,
+        error: null
+      })
+      
+    } catch (error) {
+      toast.error(error?.response?.data?.error)
+    }
+  }
+    ,
 
   checkAuth: async () => {
 

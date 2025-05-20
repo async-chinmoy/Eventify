@@ -21,7 +21,8 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const res = await signup(formData)
-    if (res) {
+    if (res.success) {
+      toast.success("Signup successful")
       navigate('/home');
     }
     setFormData({

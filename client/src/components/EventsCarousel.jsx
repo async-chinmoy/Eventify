@@ -1,15 +1,16 @@
 import React, { useEffect, useRef } from "react";
 import useEventStore from "../stores/eventStore";
-
+import {useNavigate} from 'react-router-dom'
 const EventCarousel = () => {
   const { events, isLoading, fetchEvents } = useEventStore();
   const carouselRef = useRef(null);
-
+  const navigate =  useNavigate();
+  
   useEffect(() => {
     fetchEvents();
   }, [fetchEvents]);
 
-  // Scroll manually with buttons
+
   const scrollCarousel = (direction) => {
     const container = carouselRef.current;
     if (container) {
@@ -18,7 +19,7 @@ const EventCarousel = () => {
     }
   };
 
-  // Auto-scroll every 3s
+
   useEffect(() => {
     const interval = setInterval(() => {
       scrollCarousel(1);
@@ -35,12 +36,13 @@ const EventCarousel = () => {
       <div className="relative w-full py-4">
         <div
           ref={carouselRef}
-          className="flex  overflow-x-auto scrollbar-hide scroll-smooth gap-5 snap-x snap-mandatory px-4"
+          className="flex  overflow-x-auto scrollbar-hide scroll-smooth gap-5 snap-x snap-mandatory px-4 "
         >
           {events.map((event) => (
             <div
+            onClick={()=>{ navigate(`/event/${event._id}`)}}
               key={event._id}
-              className="w-80 border border-gray-100  flex-shrink-0 snap-start bg-gradient-to-t from-[#e9d4ff]  to-[#c27aff] p-6 rounded-xl shadow-md "
+              className="w-80 border border-gray-100 cursor-pointer flex-shrink-0 snap-start bg-gradient-to-t from-[#e9d4ff]  to-[#c27aff] p-6 rounded-xl shadow-md hover:scale-105  transition-all"
             >
               <div>
                 <img
