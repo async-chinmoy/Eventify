@@ -1,11 +1,12 @@
 import React, { useEffect, useRef } from "react";
 import useEventStore from "../stores/eventStore";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { motion, scale } from "framer-motion"
 const EventCarousel = () => {
   const { events, isLoading, fetchEvents } = useEventStore();
   const carouselRef = useRef(null);
-  const navigate =  useNavigate();
-  
+  const navigate = useNavigate();
+
   useEffect(() => {
     fetchEvents();
   }, [fetchEvents]);
@@ -32,17 +33,28 @@ const EventCarousel = () => {
     return <div className="text-center py-10">No events found.</div>;
 
   return (
-    <div className="mx-12">
-      <div className="relative w-full py-4">
+    <div className="mx-12 ">
+      <motion.div whileInView={{
+        opacity: [0, 1],
+        y: [100, 0]
+      }}
+      transition={{
+        duration: 0.3
+      }}
+        className="relative w-full h-100 py-4">
         <div
           ref={carouselRef}
           className="flex  overflow-x-auto scrollbar-hide scroll-smooth gap-5 snap-x snap-mandatory px-4 "
         >
           {events.map((event) => (
-            <div
-            onClick={()=>{ navigate(`/event/${event._id}`)}}
+            <motion.div
+              onClick={() => { navigate(`/event/${event._id}`) }}
+              whileHover={{ scale: 1.1 }}
+              transition={{
+                duration:0.2
+              }}
               key={event._id}
-              className="w-80 border border-gray-100 cursor-pointer flex-shrink-0 snap-start bg-gradient-to-t from-[#e9d4ff]  to-[#c27aff] p-6 rounded-xl shadow-md hover:scale-105  transition-all"
+              className="w-80 border border-gray-100 cursor-pointer flex-shrink-0 snap-start bg-gradient-to-t from-[#e9d4ff]  to-[#c27aff] p-6 rounded-xl shadow-md   transition-all"
             >
               <div>
                 <img
@@ -53,7 +65,7 @@ const EventCarousel = () => {
                 <h3 className="text-xl font-semibold mb-2">{event.title}</h3>
                 <p className="text-sm">{event.description}</p>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
@@ -70,7 +82,7 @@ const EventCarousel = () => {
         >
           &gt;
         </button>
-      </div>
+      </motion.div>
     </div>
   );
 };

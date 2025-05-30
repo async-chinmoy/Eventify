@@ -2,10 +2,10 @@
 import Event from "../models/event.model.js";
 
 export const createEvent = async (req, res) => {
-  const { title, date, description, image } = req.body;
+  const { title, date, description, image, type} = req.body;
 
   try {
-    if (!title || !date || !description || !image) {
+    if (!title || !date || !description || !image || !type) {
       return res.status(400).send({ error: "Please fill all the fields" });
     }
 
@@ -19,13 +19,15 @@ export const createEvent = async (req, res) => {
       date,
       description,
       image,
+      type,
     });
 
     await newEvent.save();
 
-    res.status(201).send({ message: "Event created successfully", newEvent });
+    res.status(201).send({ message: "Event created successfully",success:true ,newEvent });
   } catch (error) {
     console.log(error);
+    res.status(500).send({ error: "Internal server error" ,success:false});
   }
 };
 

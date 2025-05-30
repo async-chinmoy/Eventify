@@ -16,6 +16,11 @@ const eventSchema = new mongoose.Schema({
     image: {
         type: String,
         required: true
+    },
+    type:{
+        type: String,
+        required: true,
+        enum :[ 'Technical','Cultural', 'Sports','Workshops & Seminars', 'Literary', 'Management', 'Social Initiatives', 'Other' ]
     }
 },{timestamps: true})
 

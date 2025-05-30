@@ -1,4 +1,4 @@
-import React from 'react'
+import { motion } from 'framer-motion';
 
 const Categories = () => {
 
@@ -36,18 +36,26 @@ const Categories = () => {
     return (
         <div>
             <div className='grid grid-cols-3 gap-5 px-30 py-10'>
-                {eventCategories.map((category)=>{
+                {eventCategories.map((category) => {
                     return (
-                        <div className='flex flex-col justify-start px-5 py-5 gap-10 items-center rounded-2xl shadow-xl bg-gradient-to-t from-[#e9d4ff] to-[#dab0ff]  cursor-pointer hover:scale-110 transition-all  h-50'>
+                        <motion.div
+                            whileInView={{
+                                opacity: [0, 1],
+                                y: [-200, 0]
+                            }}
+                            whileTap={{ scale: 0.75   }}
+                            whileHover={{ scale: 1.1 }}
+                            
+                            className='flex flex-col justify-start px-5 py-5 gap-10 items-center rounded-2xl shadow-xl bg-gradient-to-t from-[#e9d4ff] to-[#dab0ff]  cursor-pointer transition-all  h-50'>
                             <h1 className='text-2xl font-bold'>{category.name}</h1>
                             <div className='flex gap-3 flex-wrap text-sm'>
-                                {category.examples.map((example)=>{
+                                {category.examples.map((example) => {
                                     return (
                                         <span className='px-3 py-2 bg-white rounded-2xl'>{example}</span>
-                                    )  
+                                    )
                                 })}
                             </div>
-                        </div>
+                        </motion.div>
                     )
                 })}
             </div>

@@ -7,6 +7,7 @@ import EventDetails from './pages/EventDetails'
 import Events from './pages/Events'
 import About from './pages/About'
 import Navbar from './components/Navbar'
+import CreateEvent from './pages/CreateEvent'
 
 import { ProtectedRoutes } from './services/ProtectedRoutes'
 import useAuthStore from './stores/authStore'
@@ -46,6 +47,7 @@ const App = () => {
         <Route path="/event/:id" element={<ProtectedRoutes><EventDetails /></ProtectedRoutes>} />        
         <Route path="/events" element={<ProtectedRoutes><Events /></ProtectedRoutes>} />        
         <Route path="/about" element={<ProtectedRoutes><About /></ProtectedRoutes>} />        
+        <Route path="/createEvent" element={<ProtectedRoutes><CreateEvent /></ProtectedRoutes>} />        
 
 
       </Routes>

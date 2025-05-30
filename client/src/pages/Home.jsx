@@ -4,6 +4,8 @@ import { IoSearch } from 'react-icons/io5'
 import image from '../assets/image.svg'
 import { useEffect } from 'react'
 import useAuthStore from '../stores/authStore'
+import {motion} from 'framer-motion'
+import image2 from '../assets/background2.svg'
 
 import EventsCarousel from '../components/EventsCarousel'
 import { redirect } from 'react-router-dom'
@@ -31,14 +33,21 @@ const Home = () => {
         </div>
 
         <div className='w-4/5 h-96 mt-2 rounded-3xl flex justify-between  items-center bg-purple-200'>
-          <div className='w-1/2 flex flex-col justify-center items-start gap-4 p-10 '>
+          <motion.div whileInView={{
+            opacity: [0, 1],
+            x: [-200, 0]
+          }}
+            transition={{
+              duration: 1.5
+            }}
+            className='w-1/2 flex flex-col justify-center items-start gap-4 p-10 '>
 
             <span className='text-4xl font-bold bg-purple-400 px-5 py-2 rounded-xl'>
               {user?.name ? `Welcome Back ${user.name}` : 'Welcome to Eventify'}
             </span>
 
             <p className='text-sm text-grey-600 font-semibold'>We’ve got fresh events, exclusive experiences, and everything in between waiting for you. Dive back in and make the most of what’s coming up....</p>
-          </div>
+          </motion.div>
           <img className='w-1/2' src={image} alt="image" />
 
         </div>
@@ -53,7 +62,7 @@ const Home = () => {
       </span>
       <EventsCarousel />
 
-      <section className='flex flex-col justify-center items-center mx-16 mt-20 mx-auto'>
+      <section className='flex flex-col justify-center items-center mx-16 mt-20'>
         <span className='text-4xl font-bold pb-3'>Events Categories
           <div className='h-0.5 w-full bg-gray-800 mt-3 rounded-2xl '></div>
         </span>
