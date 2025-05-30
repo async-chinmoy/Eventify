@@ -14,8 +14,9 @@ const useEventStore = create((set) => ({
         try {
             const res = await axiosInstance.get('/events/getEvents')
             const data = res.data.events;
+            const sortedEvents = data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
             set({
-                events: data,
+                events: sortedEvents,
                 isLoading: false
             })
         } catch (error) {

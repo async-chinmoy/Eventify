@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-
+// import {useNavigate} from 'react-router-dom';
 const Categories = () => {
 
     const eventCategories = [
@@ -33,6 +33,8 @@ const Categories = () => {
         }
     ];
 
+    // const navigate = useNavigate();
+
     return (
         <div>
             <div className='grid grid-cols-3 gap-5 px-30 py-10'>
@@ -43,9 +45,10 @@ const Categories = () => {
                                 opacity: [0, 1],
                                 y: [-200, 0]
                             }}
-                            whileTap={{ scale: 0.75   }}
+                            whileTap={{ scale: 0.75 }}
                             whileHover={{ scale: 1.1 }}
-                            
+
+                            // onClick={navigate(`/event/${category.name}`)}
                             className='flex flex-col justify-start px-5 py-5 gap-10 items-center rounded-2xl shadow-xl bg-gradient-to-t from-[#e9d4ff] to-[#dab0ff]  cursor-pointer transition-all  h-50'>
                             <h1 className='text-2xl font-bold'>{category.name}</h1>
                             <div className='flex gap-3 flex-wrap text-sm'>

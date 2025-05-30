@@ -27,7 +27,7 @@ const Events = () => {
             <div className='flex flex-col justify-center items-start mt-2'>
                 {events.map((event) => (
                     <EventCard
-                        key={event._id} image={event.image} title={event.title} description={event.description} />
+                        id={event._id} image={event.image} date={event.date.slice(0, 10)} title={event.title} description={event.description} />
                 ))}
             </div>
         </div>
