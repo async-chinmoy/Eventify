@@ -26,11 +26,13 @@ const EventDetails = () => {
 
 
   if (!event) {
-    return <div>Loading...</div>;
+    return (<div className='flex h-screen justify-center items-center '>
+        <div className='animate-spin rounded-full h-22 w-22 border-b-4 border-t-2 border-gray-900'></div>
+    </div>)
   }
   return (
     <section className='h-screen mx-10 mt-4'>
-      <div className='flex justify-between min-w-120 h-120 items-center px-20 rounded-2xl bg-gradient-to-r from-[#e9d4ff]  via-fuchsia-100 to-[##e9d4ff] shadow-xl/15'>
+      <div className='flex justify-between min-w-120 h-120 items-center px-20 rounded-2xl bg-gradient-to-r from-[#e9d4ff]  to-[##e9d4ff] shadow-xl/15'>
         <div className='w-1/2 aspect-16/9 px-10 py-5'>
           <motion.img
             whileInView={{
@@ -40,7 +42,7 @@ const EventDetails = () => {
             transition={{
               duration: 1.02
             }}
-            className='rounded-xl w-full h-full object-cover'
+            className='rounded-xl w-full h-full object-cover shadow-xl/30'
             src={event.image} alt="image" />
         </div>
         <motion.div
@@ -51,18 +53,18 @@ const EventDetails = () => {
           }}
           transition={{
             duration: 1.02,
-            staggerChildren: 1  
+            staggerChildren: 1
           }}
-          
+
 
           className='flex flex-col gap-2 w-1/2 justify-center items-start h-full px-10 py-5'>
           <span className='text-3xl font-bold bg-white px-6 py-4 rounded-3xl' >
             {event.title}
           </span>
-          <p className='bg-gradient-to-r from-[#e9d4ff]  via-[##c27aff] to-fuchsia-300 to- px-8 py-4 h-40 w-full font-semibold   rounded-tr-3xl rounded-bl-3xl'>{event.description}</p>
-          <button 
-         
-          className='flex justify-center items-center rounded-md gap-6 bg-white px-8 py-3 font-semibold shadow-xl/50 cursor-pointer'>
+          <p className='bg-gradient-to-r shadow-2xl from-[#e9d4ff]  via-[##c27aff] to-fuchsia-300 to- px-8 py-4 h-40 w-full font-semibold   rounded-tr-3xl rounded-bl-3xl'>{event.description}</p>
+          <button
+
+            className='flex justify-center items-center rounded-md gap-6 mt-10 bg-white px-8 py-3 font-semibold shadow-xl/20 cursor-pointer'>
             Enroll
             <img className='text-black' src={enroll} alt="enroll" />
           </button>

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import useEventStore from "../stores/eventStore";
 import { useNavigate } from 'react-router-dom'
-import { motion, scale } from "framer-motion"
+import { motion } from "framer-motion"
 const EventCarousel = () => {
   const { events, isLoading, fetchEvents } = useEventStore();
   const carouselRef = useRef(null);

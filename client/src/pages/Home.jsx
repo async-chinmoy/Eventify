@@ -5,7 +5,7 @@ import image from '../assets/image.svg'
 import { useEffect } from 'react'
 import useAuthStore from '../stores/authStore'
 import {motion} from 'framer-motion'
-import image2 from '../assets/background2.svg'
+// import image2 from '../assets/background2.svg'
 
 import EventsCarousel from '../components/EventsCarousel'
 import { redirect } from 'react-router-dom'
@@ -21,18 +21,10 @@ const Home = () => {
   }, [user])
 
   return (
-    <div className='min-h-screen '>
-      <section className='flex relative flex-col  justify-center items-center mx-auto '>
-        <div className='flex gap-4 items-center justify-center border rounded-full px-4 cursor-pointer  mt-5 '>
-          <input type="text"
-            className='outline-none px-4 py-2 rounded-full w-96'
-            placeholder='Search nearby Events...' />
-          <button>
-            <IoSearch className='text-2xl ' />
-          </button>
-        </div>
+    <div className='min-h-screen overflow-y-scroll scroll-smooth snap-y snap-mandatory'>
+      <section className='flex relative flex-col  justify-center items-center mx-auto snap-start'>
 
-        <div className='w-4/5 h-96 mt-2 rounded-3xl flex justify-between  items-center bg-purple-200'>
+        <div className='w-4/5 h-96 mt-5 rounded-3xl flex justify-between  items-center bg-purple-200'>
           <motion.div whileInView={{
             opacity: [0, 1],
             x: [-200, 0]
@@ -54,15 +46,17 @@ const Home = () => {
 
       </section>
 
-      <span className='flex  justify-start items-center mx-16'>
-        <h1 className='text-3xl font-bold text-center mt-5 pb-6'>Upcoming Events
-          <div className='h-0.5 w-full bg-gray-800 mt-3 rounded-2xl '></div>
-        </h1>
+      <section className='snap-start'>
+        <span className='flex  justify-start items-center mx-16'>
+          <h1 className='text-3xl font-bold text-center mt-5 pb-6'>Upcoming Events
+            <div className='h-0.5 w-full bg-gray-800 mt-3 rounded-2xl '></div>
+          </h1>
 
-      </span>
-      <EventsCarousel />
+        </span>
+        <EventsCarousel />
+      </section>
 
-      <section className='flex flex-col justify-center items-center mx-16 mt-20'>
+      <section className='flex flex-col justify-center items-center mx-16 mt-20 snap-start'>
         <span className='text-4xl font-bold pb-3'>Events Categories
           <div className='h-0.5 w-full bg-gray-800 mt-3 rounded-2xl '></div>
         </span>

@@ -5,7 +5,7 @@ import { IoLogOut } from "react-icons/io5";
 import useAuthStore from "../stores/authStore";
 
 const Navbar = () => {
-    const { logout, createEvent } = useAuthStore();
+    const { logout } = useAuthStore();
 
     const handleLogout = () => {
         logout();

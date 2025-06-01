@@ -31,7 +31,7 @@ const Footer = () => {
           <div>
             <h2 className="font-semibold mb-5 text-gray-800">Get in touch</h2>
             <div className="text-sm space-y-2">
-              <p>+91-98765-43210</p>
+              <p>+91-76379-60529</p>
               <p>support@eventify.com</p>
             </div>
           </div>

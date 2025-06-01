@@ -1,4 +1,3 @@
-import React, { use } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
@@ -31,7 +30,7 @@ const App = () => {
   if (checking) {
     return (
       <div className="flex justify-center items-center h-screen">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
+        <div className="animate-spin rounded-full h-22 w-22 border-b-2 border-gray-900"></div>
       </div>
     )
   }
