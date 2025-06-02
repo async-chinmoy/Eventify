@@ -15,7 +15,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify'
 
 const App = () => {
-  const { checkAuth,isAuth } = useAuthStore();
+  const { checkAuth, isAuth } = useAuthStore();
   const [checking, setChecking] = useState(true);
 
   useEffect(() => {
@@ -36,21 +36,27 @@ const App = () => {
   }
   return (
     <>
-     {isAuth && <Navbar />}
+      {isAuth && <Navbar />}
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        
+
         <Route path="/" element={<ProtectedRoutes><Home /></ProtectedRoutes>} />
-        <Route path="/home" element={<ProtectedRoutes><Home /></ProtectedRoutes>} />        
-        <Route path="/event/:id" element={<ProtectedRoutes><EventDetails /></ProtectedRoutes>} />        
-        <Route path="/events" element={<ProtectedRoutes><Events /></ProtectedRoutes>} />        
-        <Route path="/about" element={<ProtectedRoutes><About /></ProtectedRoutes>} />        
-        <Route path="/createEvent" element={<ProtectedRoutes><CreateEvent /></ProtectedRoutes>} />        
+        <Route path="/home" element={<ProtectedRoutes><Home /></ProtectedRoutes>} />
+        <Route path="/event/:id" element={<ProtectedRoutes><EventDetails /></ProtectedRoutes>} />
+        <Route path="/events" element={<ProtectedRoutes><Events /></ProtectedRoutes>} />
+        <Route path="/about" element={<ProtectedRoutes><About /></ProtectedRoutes>} />
+        <Route path="/createEvent" element={<ProtectedRoutes><CreateEvent /></ProtectedRoutes>} />
 
 
       </Routes>
-      <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem]"><div className="absolute bottom-0 left-0 right-0 top-0 bg-[radial-gradient(circle_800px_at_100%_200px,#d5c5ff,transparent)]"></div></div>
+  
+      <div className="fixed inset-0 -z-10 w-full bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem]"
+        style={{ minHeight: '100%' }}
+      >
+        <div className="absolute inset-0 bg-[radial-gradient(circle_800px_at_100%_200px,#d5c5ff,transparent)]"></div>
+      </div>
+
       <ToastContainer />
     </>
 

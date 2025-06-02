@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import useEventStore from "../stores/eventStore";
 import { toast } from "react-toastify";
 import { useState } from "react";
+
 const CreateEvent = () => {
     const { createEvent } = useEventStore();
     const [formData, setFormData] = useState({
@@ -9,21 +10,28 @@ const CreateEvent = () => {
         description: '',
         date: '',
         image: '',
+        time:'',
         type: '',
+        createdBy: ''
     })
-    const { title, description, date, image, type } = formData;
+    const { title, description, date, image, type, time } = formData;
     const navigate = useNavigate();
 
     const handleChange = (e) => {
         setFormData({
             ...formData,
-            [e.target.id]: e.target.value
+            [e.target.id]: e.target.value,
         })
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
+
         try {
-            const res = await createEvent(formData)
+
+            const data ={
+                ...formData,
+            }
+            const res = await createEvent(data)
             if (res.success) {
                 toast.success("Event created successfully")
                 navigate('/events');
@@ -32,6 +40,7 @@ const CreateEvent = () => {
                 title: '',
                 description: '',
                 date: '',
+                time:'',
                 image: '',
                 type: '',
             })
@@ -45,7 +54,8 @@ const CreateEvent = () => {
         <div className="flex justify-center items-center h-90vh w-full">
             <form
                 onSubmit={handleSubmit}
-                className="bg-[#e7ceff] text-gray-900 mt-10 w-full max-w-[400px] mx-4 md:p-6 p-4 py-8 text-left text-sm rounded-lg shadow-[0px_0px_10px_0px] shadow-black/10">
+                className="bg-[#e7ceff] text-gray-900 mt-8 w-full max-w-[400px] mx-4 md:p-6 p-4 py-8 text-left text-sm rounded-lg shadow-[0px_0px_10px_0px] shadow-black/10">
+                <h1 className="text-3xl font-bold     text-center text-gray-800">Create Event</h1>
                 <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Please fill the form...</h2>
 
                 <input
@@ -68,6 +78,7 @@ const CreateEvent = () => {
                     required
                 />
 
+
                 <input
                     id="date"
                     value={date}
@@ -77,7 +88,15 @@ const CreateEvent = () => {
                     placeholder="Enter your Event Date"
                     required
                 />
-
+                <input
+                    id="time"
+                    value={time}
+                    onChange={handleChange}
+                    className="w-full border mt-1 bg-indigo-500/5 mb-2 border-gray-500/10 outline-none rounded py-2.5 px-3"
+                    type="time"
+                    placeholder="Enter your Event timings"
+                    required
+                />
                 <input
                     id="image"
                     value={image}

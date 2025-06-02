@@ -2,10 +2,10 @@
 import Event from "../models/event.model.js";
 
 export const createEvent = async (req, res) => {
-  const { title, date, description, image, type} = req.body;
+  const { title, date, description, image,time, type} = req.body;
 
   try {
-    if (!title || !date || !description || !image || !type) {
+    if (!title || !date || !description || !image || !type||!time) {
       return res.status(400).send({ error: "Please fill all the fields" });
     }
 
@@ -13,13 +13,15 @@ export const createEvent = async (req, res) => {
     if (eventCheck) {
       return res.status(400).send({ error: "Event already exists" });
     }
-
+    
     const newEvent = new Event({
       title,
       date,
       description,
       image,
+      time,
       type,
+      createdBy:req.user._id
     });
 
     await newEvent.save();
@@ -33,7 +35,7 @@ export const createEvent = async (req, res) => {
 
 export const getEvents = async (req, res) => {
   try {
-    const events = await Event.find();
+    const events = await Event.find().populate('createdBy','name')
     res.status(200).send({ events });
   } catch (error) {
     console.log(error);
@@ -44,7 +46,7 @@ export const getEventbyId = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const event = await Event.findById(id);
+    const event = await Event.findById(id).populate('createdBy','name');
     res.status(200).send({ event });
   } catch (error) {
     console.log(error);

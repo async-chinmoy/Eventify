@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom'
 import './index.css'
 import App from './App.jsx'
 import { useEffect } from 'react'
-import useAuthStore from './stores/AuthStore'
+import useAuthStore from './stores/authStore'
 
 const AuthLoader = ({ children }) => {
   const { checkAuth } = useAuthStore();

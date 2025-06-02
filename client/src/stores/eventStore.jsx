@@ -1,7 +1,6 @@
-import { useEffect } from "react";
+
 import { axiosInstance } from "../services/Axios";
 import { create } from "zustand";
-import { registerEvent } from "../../../server/controllers/user.controller";
 import { toast } from "react-toastify";
 
 const useEventStore = create((set) => ({

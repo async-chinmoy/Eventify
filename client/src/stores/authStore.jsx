@@ -46,8 +46,8 @@ const useAuthStore = create((set) => ({
   ,
     logout: async () =>{
     try {
-      const res = await axiosInstance.post('/auth/logout')
-      const user = res.data.user
+      await axiosInstance.post('/auth/logout')
+      
       set({
         loading: false,
         user: null,
@@ -76,6 +76,7 @@ const useAuthStore = create((set) => ({
         })
       }
     } catch (error) {
+      toast.error(error?.response?.data?.error)
       set({
         loading: false,
         user: null,

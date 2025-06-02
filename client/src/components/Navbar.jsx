@@ -1,15 +1,30 @@
 import logo from "../assets/logo.svg"
 import { Link } from "react-router-dom"
-import { MdOutlineAccountCircle } from "react-icons/md";
-import { IoLogOut } from "react-icons/io5";
-import useAuthStore from "../stores/authStore";
+import { MdAccountCircle } from "react-icons/md";
 
+import Profile from "./Profile";
+import { useState,useEffect, useRef } from "react";
 const Navbar = () => {
-    const { logout } = useAuthStore();
+    const [showProfile, setShowProfile] = useState(false);
 
-    const handleLogout = () => {
-        logout();
-    }
+    
+    const modalRef = useRef(null);
+
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (modalRef.current && !modalRef.current.contains(event.target)) {
+                setShowProfile(false);
+            }
+        }
+
+        if (showProfile) {
+            document.addEventListener('mousedown', handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [showProfile]);
 
 
     return (
@@ -40,12 +55,23 @@ const Navbar = () => {
                     </li>
                 </ul>
                 <button
-                    className="flex justify-center items-center gap-2 bg-[#dd3dff] py-3 px-5 rounded-xl cursor-pointer  ">
+                    className=" bg-[#dd3dff] py-2 px-5 rounded-xl cursor-pointer  ">
                     <Link to='/createEvent'>Create Event</Link>
                 </button>
-                <button onClick={handleLogout}>
-                    <IoLogOut className="text-3xl cursor-pointer" />
+
+                <button>
+                    <MdAccountCircle className="text-3xl cursor-pointer" onClick={() => {
+                        setShowProfile(!showProfile)
+                    }} />
+                    {showProfile && (
+                        <div ref={modalRef} className="absolute right-12 mt-2 w-48 bg-indigo-300 border rounded-xl shadow-lg z-50">
+                            <Profile />
+                        </div>
+                    )}
+
                 </button>
+
+                
             </div>
         </nav>
     )

@@ -12,7 +12,7 @@ const Events = () => {
         }
         fetchEvent();
 
-    }, [])
+    }, [])  
 
     return (
         <div className='flex flex-col justify-center items-center w-full shadow-xl/10 '    >
@@ -27,20 +27,20 @@ const Events = () => {
                 </button>
             </div>
 
-            <div className='flex flex-col justify-center items-start mt-2'>
+            <div className='flex flex-col justify-center items-start mt-2 mx-10'>
 
                 {
                     eventSearch ? (
                         events.filter((event) => event.title.toLowerCase().includes(eventSearch.toLowerCase()))
                             .map((event) => (
                                 <EventCard
-                                    id={event._id} image={event.image} date={event.date.slice(0, 10)} title={event.title} description={event.description}
+                                    id={event._id} image={event.image} createdBy={event.createdBy?.name} date={event.date.slice(0, 10)} title={event.title} description={event.description}
                                 />
                             ))
                     ) : (
                         events.map((event) => (
                             <EventCard
-                                id={event._id} image={event.image} date={event.date.slice(0, 10)} title={event.title} description={event.description}
+                                id={event._id} time={event.time} image={event.image} createdBy={event.createdBy?.name} date={event.date.slice(0, 10)} title={event.title} description={event.description}
                             />
                         ))
                     )

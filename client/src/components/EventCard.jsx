@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom'
+import { IoIosTime } from "react-icons/io";
 import { motion } from 'framer-motion'
-const EventCard = ({ image, title, description, id, date }) => {
+const EventCard = ({ image, title, description, id, date,time,createdBy }) => {
 
 
   const navigate = useNavigate();
@@ -32,6 +33,10 @@ const EventCard = ({ image, title, description, id, date }) => {
             <span className='ml-4 bg-white px-4 py-2 rounded-full'>{date}</span>
           </div>
           <p className="text-sm mt-2 text-start">{description}</p>
+          <span className='flex justify-center items-center gap-2 mt-3 text-xs font-semibold'>
+            <IoIosTime className='text-lg' />
+            {time|| 'No Time Specified'}</span>
+          <p className="text-sm mt-6 bg-white shadow-xl/10 px-6 py-3 rounded-full text-start font-semibold ">Organized By <span className='italic text-md text-pink-700'>{createdBy || 'Anonymous'}</span></p>
         </div>
       </motion.div>
     </div>
