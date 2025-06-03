@@ -13,6 +13,7 @@ import useAuthStore from './stores/authStore'
 import { useEffect, useState } from 'react'
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify'
+import Profile from './pages/Profile'
 
 const App = () => {
   const { checkAuth, isAuth } = useAuthStore();
@@ -47,7 +48,8 @@ const App = () => {
         <Route path="/events" element={<ProtectedRoutes><Events /></ProtectedRoutes>} />
         <Route path="/about" element={<ProtectedRoutes><About /></ProtectedRoutes>} />
         <Route path="/createEvent" element={<ProtectedRoutes><CreateEvent /></ProtectedRoutes>} />
-
+        <Route path="/profile" element={<ProtectedRoutes><Profile /></ProtectedRoutes>} />
+        
 
       </Routes>
   

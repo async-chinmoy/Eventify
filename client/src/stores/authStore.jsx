@@ -7,7 +7,7 @@ const useAuthStore = create((set) => ({
   error: null,
   user: null,
   loading: false,
-
+  events: [],
   login: async (userData) => {
     try {
       const res = await axiosInstance.post("/auth/login", userData)
@@ -84,6 +84,13 @@ const useAuthStore = create((set) => ({
         error: null
       })
     }
+  },
+  registerEvent: async (id) =>{
+    const res = await axiosInstance.post(`/user/register/${id}`)
+    const data = res.data.event;
+    set({
+      events: data
+    })
   }
 
 }));

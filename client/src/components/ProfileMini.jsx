@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import useAuthStore from "../stores/authStore";
 import { IoLogOut } from "react-icons/io5";
-const Profile = () => {
+const ProfileMini = () => {
     const { user, logout } = useAuthStore();
 
     const handleLogout = () => {
@@ -14,10 +14,10 @@ const Profile = () => {
 
             <div className="mb-2 border-b pb-2">
                 <p className="font-semibold text-xl ">Hello, {user?.name || "John Doe"}</p>
-                <p className="text-gray-500 overflow-hidden">{user?.email || "john@example.com"}</p>
+                <p className="text-gray-500 overflow-hidden">{user?.email || "john@dummy.com"}</p>
             </div>
 
-            {/* Links */}
+            
             <ul className="space-y-2">
                 <li>
                     <Link to="/profile" className="block hover:text-purple-600 transition">
@@ -43,4 +43,4 @@ const Profile = () => {
     );
 };
 
-export default Profile;
+export default ProfileMini;

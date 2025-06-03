@@ -2,7 +2,7 @@ import logo from "../assets/logo.svg"
 import { Link } from "react-router-dom"
 import { MdAccountCircle } from "react-icons/md";
 
-import Profile from "./Profile";
+import ProfileMini from "./ProfileMini";
 import { useState,useEffect, useRef } from "react";
 const Navbar = () => {
     const [showProfile, setShowProfile] = useState(false);
@@ -65,7 +65,7 @@ const Navbar = () => {
                     }} />
                     {showProfile && (
                         <div ref={modalRef} className="absolute right-12 mt-2 w-48 bg-indigo-300 border rounded-xl shadow-lg z-50">
-                            <Profile />
+                            <ProfileMini />
                         </div>
                     )}
 

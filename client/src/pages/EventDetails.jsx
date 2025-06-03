@@ -107,6 +107,7 @@ const EventDetails = () => {
           >
             <div ref={modalRef} className="bg-white rounded-xl shadow-2xl h-4/5 ">
               <Confirm
+               id={event._id}
                 title={event.title}
                 description={event.description}
                 time={event.time}

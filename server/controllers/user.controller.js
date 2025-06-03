@@ -33,6 +33,7 @@ export const registerEvent = async (req, res) => {
 
     user.enrolledEvents.push(id);
     await user.save();
+    console.log(user.enrolledEvents);
 
     res.status(200).send({ message: "Event registered successfully",event });
   } catch (error) {
