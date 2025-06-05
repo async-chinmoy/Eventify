@@ -10,7 +10,7 @@ const ProfileMini = () => {
     
 
     return (
-        <div className="p-4 flex flex-col    text-sm text-gray-800">
+        <div className="p-4 flex flex-col  items-center text-sm text-gray-800">
 
             <div className="mb-2 border-b pb-2">
                 <p className="font-semibold text-xl ">Hello, {user?.name || "John Doe"}</p>

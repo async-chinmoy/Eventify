@@ -1,55 +1,63 @@
-import { useState, useEffect } from 'react'
-import EventCard from '../components/EventCard'
-import useEventStore from '../stores/eventStore'
-import { IoSearch } from 'react-icons/io5'
+import { useState, useEffect, useMemo } from 'react';
+import EventCard from '../components/EventCard';
+import useEventStore from '../stores/eventStore';
+import { IoSearch } from 'react-icons/io5';
+
 const Events = () => {
-    const [eventSearch, setEventSearch] = useState('')
-    const { events, fetchEvents } = useEventStore();
+  const [eventSearch, setEventSearch] = useState('');
+  const { events, fetchEvents } = useEventStore();
 
-    useEffect(() => {
-        const fetchEvent = async () => {
-            await fetchEvents();
-        }
-        fetchEvent();
+  useEffect(() => {
+    fetchEvents();
+  }, [fetchEvents]);
 
-    }, [])  
+  const filteredEvents = useMemo(() => {
+    return eventSearch
+      ? events.filter((event) =>
+          event.title.toLowerCase().includes(eventSearch.toLowerCase())
+        )
+      : events;
+  }, [eventSearch, events]);
 
-    return (
-        <div className='flex flex-col justify-center items-center w-full shadow-xl/10 '    >
-            <div className='flex gap-4 items-center justify-center border rounded-full px-4 cursor-pointer  mt-5 '>
-                <input type="text"
-                    value={eventSearch}
-                    onChange={(e) => setEventSearch(e.target.value)}
-                    className='outline-none px-4 py-2 rounded-full w-96'
-                    placeholder='Search nearby Events...' />
-                <button>
-                    <IoSearch className='text-2xl ' />
-                </button>
-            </div>
-
-            <div className='flex flex-col justify-center items-start mt-2 mx-10'>
-
-                {
-                    eventSearch ? (
-                        events.filter((event) => event.title.toLowerCase().includes(eventSearch.toLowerCase()))
-                            .map((event) => (
-                                <EventCard
-                                    id={event._id} image={event.image} createdBy={event.createdBy?.name} date={event.date.slice(0, 10)} title={event.title} description={event.description}
-                                />
-                            ))
-                    ) : (
-                        events.map((event) => (
-                            <EventCard
-                                id={event._id} time={event.time} image={event.image} createdBy={event.createdBy?.name} date={event.date.slice(0, 10)} title={event.title} description={event.description}
-                            />
-                        ))
-                    )
-                }
-
-            </div>
+  return (
+    <div className="w-full min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 py-6 px-4 md:px-10">
+      
+      <div className="flex justify-center mb-8">
+        <div className="flex items-center w-full max-w-xl border border-gray-300 rounded-full shadow-sm px-4 bg-white">
+          <input
+            type="text"
+            value={eventSearch}
+            onChange={(e) => setEventSearch(e.target.value)}
+            className="w-full px-4 py-2 rounded-full outline-none"
+            placeholder="Search events by title..."
+          />
+          <IoSearch className="text-xl text-gray-600" />
         </div>
+      </div>
 
-    )
-}
+      
+      <div className="gap-8">
+        {filteredEvents.length > 0 ? (
+          filteredEvents.map((event) => (
+            <EventCard
+              key={event._id}
+              id={event._id}
+              image={event.image}
+              title={event.title}
+              description={event.description}
+              date={event.date.slice(0, 10)}
+              time={event.time}
+              createdBy={event.createdBy?.name}
+            />
+          ))
+        ) : (
+          <div className="col-span-full text-center text-gray-500 text-lg">
+            No events found.
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
 
-export default Events
+export default Events;

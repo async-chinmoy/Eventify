@@ -1,5 +1,4 @@
 import User from "../models/user.model.js";
-import Register from "../models/register.model.js";
 import Event from "../models/event.model.js";
 
 export const getUser = async (req, res) => {
@@ -33,11 +32,9 @@ export const registerEvent = async (req, res) => {
 
     user.enrolledEvents.push(id);
     await user.save();
-    console.log(user.enrolledEvents);
 
     res.status(200).send({ message: "Event registered successfully",event });
   } catch (error) {
-    console.log(error);
     res.status(500).send({ error: "Something went wrong" });
   }
 };

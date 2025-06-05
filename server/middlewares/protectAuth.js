@@ -11,7 +11,7 @@ export const protectAuth = async (req, res, next) => {
     if(!decoded){
         return res.status(400).send({ error: "Please login first" });
     }
-    const user = await User.findById(decoded.id)
+    const user = await User.findById(decoded.id).populate("enrolledEvents", "title date description image time type status");
     if(!user){
         return res.status(400).send({ error: "Please login first" });
     }
@@ -20,7 +20,6 @@ export const protectAuth = async (req, res, next) => {
     next();
 
   } catch (error) {
-    console.log(error);
     res.status(401).send({ error: "Invalid or expired token, please login again" });
   }
 };

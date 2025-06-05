@@ -22,6 +22,12 @@ const eventSchema = new mongoose.Schema({
         ref: 'User',
         required: true
     },
+    status:{
+        type: String,
+        required: true,
+        enum: ['Upcoming', 'Ongoing', 'Completed', 'Cancelled'],
+        default: 'Upcoming'
+    },
     time:{
         type:String,
         required: true

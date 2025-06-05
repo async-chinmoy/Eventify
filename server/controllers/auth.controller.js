@@ -39,7 +39,7 @@ export const signup = async (req, res) => {
       .status(201)
       .send({ message: "User created successfully", newUser, token });
   } catch (error) {
-    console.log(error);
+    res.status(500).send({ error: "Internal server error" });
   }
 };
 
@@ -62,12 +62,17 @@ export const login = async (req, res) => {
     } else {
       const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
       res.cookie("token", token);
+      const newUser = await User.findById(user._id).populate(
+        "enrolledEvents",
+        "title date description image time type status"
+      );
+
       res
         .status(201)
-        .send({ message: "User logged in successfully", user, token });
+        .send({ message: "User logged in successfully", user: newUser, token });
     }
   } catch (error) {
-    console.log(error);
+    res.status(500).send({ error: "Internal server error" });
   }
 };
 

@@ -1,7 +1,8 @@
 import React from "react"
-import { HiCalendar,HiClock, HiLocationMarker, HiUsers, HiCog, HiPencil,} from "react-icons/hi"
+import { HiCalendar, HiClock, HiLocationMarker, HiUsers, HiCog, HiPencil, } from "react-icons/hi"
 import useAuthStore from "../stores/authStore"
-import {toast} from 'react-toastify'
+
+
 const registeredEvents = [
   {
     id: 1,
@@ -75,17 +76,18 @@ function getCategoryColor(category) {
 
 export default function Component() {
 
-    const { user} = useAuthStore();
-    const userData = user||"John"
-  toast.success("Work Remaining")
+  const { user } = useAuthStore();
+  const userData = user || "John"
+  const enrolledEvents = user?.enrolledEvents || [];
+
   const upcomingEvents = registeredEvents.filter((event) => event.status === "upcoming")
   const completedEvents = registeredEvents.filter((event) => event.status === "completed")
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-4 md:p-8">
+    <div className="min-h-screen p-4 md:p-8">
       <div className="mx-auto max-w-6xl space-y-8">
 
-        <div className="relative overflow-hidden rounded-2xl bg-white shadow-sm border">
+        <div className="relative overflow-hidden rounded-2xl bg-blue-50 shadow-2xl border">
           <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-10"></div>
           <div className="relative p-8">
             <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
@@ -134,7 +136,7 @@ export default function Component() {
           </div>
         </div>
 
-       
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="border-0 shadow-sm bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg">
             <div className="p-6 flex items-center gap-4">
@@ -173,20 +175,20 @@ export default function Component() {
           </div>
         </div>
 
-        {upcomingEvents.length > 0 && (
+        {enrolledEvents.length > 0 && (
           <div className="space-y-6">
             <div className="flex items-center gap-3">
-              <h2 className="text-2xl font-bold text-gray-900">Upcoming Events</h2>
+              <h2 className="text-2xl font-bold text-gray-900">Enrolled Events</h2>
               <span className="inline-block bg-green-100 text-green-800 px-2 py-1 rounded text-sm font-semibold">
-                {upcomingEvents.length}
+                {enrolledEvents?.length || 0}
               </span>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {upcomingEvents.map((event) => (
+              {enrolledEvents.map((event) => (
                 <div
                   key={event.id}
-                  className="border-0 shadow-sm hover:shadow-md transition-shadow duration-200 bg-white rounded-lg"
+                  className="border-0 hover:shadow-3xl shadow-2xl transition-shadow duration-200 bg-white rounded-lg"
                 >
                   <div className="p-6 pb-3">
                     <div className="flex items-start justify-between gap-4">
@@ -204,10 +206,10 @@ export default function Component() {
                         </span>
                         <span
                           className={`inline-block px-2 py-1 rounded text-xs font-semibold ${getCategoryColor(
-                            event.category
+                            event.type  
                           )}`}
                         >
-                          {event.category}
+                          {event.type}
                         </span>
                       </div>
                     </div>
@@ -235,7 +237,7 @@ export default function Component() {
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2 text-sm text-gray-600">
                         <HiLocationMarker className="h-4 w-4" />
-                        <span>{event.location}</span>
+                        <span>{event.location || "Not Specified"}</span>
                       </div>
                       <div className="flex items-center gap-2 text-sm text-gray-600">
                         <HiUsers className="h-4 w-4" />
@@ -261,10 +263,10 @@ export default function Component() {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {completedEvents.map((event) => (
+              {completedEvents?.map((event) => (
                 <div
                   key={event.id}
-                  className="border-0 shadow-sm bg-white opacity-90 rounded-lg"
+                  className="border-0 hover:shadow-3xl shadow-2xl bg-white opacity-90 rounded-lg"
                 >
                   <div className="p-6 pb-3">
                     <div className="flex items-start justify-between gap-4">
@@ -326,6 +328,7 @@ export default function Component() {
             </div>
           </div>
         )}
+        
       </div>
     </div>
   )

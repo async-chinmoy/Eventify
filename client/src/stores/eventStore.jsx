@@ -49,7 +49,8 @@ const useEventStore = create((set) => ({
             toast.error(error?.response?.data?.error)
             return { success: false, error: error?.response?.data?.error || "Server error" };
         }
-    }
+    },
+
     
 }))
 

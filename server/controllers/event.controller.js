@@ -28,7 +28,6 @@ export const createEvent = async (req, res) => {
 
     res.status(201).send({ message: "Event created successfully",success:true ,newEvent });
   } catch (error) {
-    console.log(error);
     res.status(500).send({ error: "Internal server error" ,success:false});
   }
 };
@@ -38,7 +37,7 @@ export const getEvents = async (req, res) => {
     const events = await Event.find().populate('createdBy','name')
     res.status(200).send({ events });
   } catch (error) {
-    console.log(error);
+    res.status(500).send({ error: "Internal server error" });
   }
 };
 
@@ -49,7 +48,7 @@ export const getEventbyId = async (req, res) => {
     const event = await Event.findById(id).populate('createdBy','name');
     res.status(200).send({ event });
   } catch (error) {
-    console.log(error);
+    res.status(500).send({ error: "Internal server error" });
   }
 };
 
@@ -62,7 +61,7 @@ export const deleteEvent = async (req, res) =>{
       } 
       
     catch (error) {
-        console.log(error);
+        res.status(500).send({ error: "Internal server error" });
       }
 }
 
@@ -80,6 +79,6 @@ export const updateEvent = async (req, res) =>{
         res.status(200).send({ message: "Event updated successfully", event });
 
     } catch (error) {
-        console.log(error);
+        res.status(500).send({ error: "Internal server error" });
     }
 }
