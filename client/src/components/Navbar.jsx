@@ -4,6 +4,7 @@ import { MdAccountCircle } from "react-icons/md";
 import { HiMenu, HiX } from "react-icons/hi";
 import ProfileMini from "./ProfileMini";
 import { useState, useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 
 const Navbar = () => {
   const [showProfile, setShowProfile] = useState(false);
@@ -29,13 +30,13 @@ const Navbar = () => {
   return (
 
     <nav className="h-20 w-full flex items-center justify-between px-6 md:px-12 bg-white sticky top-0 z-10 shadow-md">
-      
+
       <span className="flex items-center gap-4">
         <img className="w-16 md:w-20" src={logo} alt="logo" />
-        <h1 className="text-xl md:text-3xl font-bold tracking-widest">Eventify</h1>
+        <h1 className="text-xl md:text-3xl font-bold tracking-widest">Event<span className="text-yellow-300">ify</span></h1>
       </span>
 
-      
+
       <div className="hidden md:flex text-md font-semibold gap-10 items-center">
         <ul className="flex items-center gap-8">
           <li>
@@ -76,16 +77,20 @@ const Navbar = () => {
         )}
       </div>
 
-     
+
       <div className="md:hidden">
         <button onClick={() => setMobileMenu(!mobileMenu)}>
           {mobileMenu ? <HiX className="text-3xl" /> : <HiMenu className="text-3xl" />}
         </button>
       </div>
 
-      
+
       {mobileMenu && (
-        <div className="absolute top-20 left-0 w-full bg-white shadow-md border-t z-40 md:hidden">
+        <motion.div
+          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.2 }}
+          className="absolute top-20 left-0 w-full bg-white shadow-md border-t z-40 md:hidden">
           <ul className="flex flex-col text-center gap-4 py-6 font-medium text-lg">
             <li>
               <Link to="/home" onClick={() => setMobileMenu(false)}>Home</Link>
@@ -118,7 +123,7 @@ const Navbar = () => {
               )}
             </li>
           </ul>
-        </div>
+        </motion.div>
       )}
     </nav>
   );
