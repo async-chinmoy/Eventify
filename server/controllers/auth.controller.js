@@ -33,7 +33,11 @@ export const signup = async (req, res) => {
     await newUser.save();
 
     const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);
-    res.cookie("token", token);
+    res.cookie('token', token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',  
+        sameSite: 'None', 
+    });
 
     res
       .status(201)
@@ -61,11 +65,11 @@ export const login = async (req, res) => {
       return res.status(400).send({ error: "Incorrect password" });
     } else {
       const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-      res.cookie("token", token);
-      const newUser = await User.findById(user._id).populate(
-        "enrolledEvents",
-        "title date description image time type status"
-      );
+      res.cookie('token', token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',  
+        sameSite: 'None', 
+    });
 
       res
         .status(201)
