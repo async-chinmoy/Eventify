@@ -35,8 +35,7 @@ export const signup = async (req, res) => {
     const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);
     res.cookie('token', token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',  
-        sameSite: 'None', 
+        secure: process.env.NODE_ENV === 'production' ? true : false,
     });
 
     res
@@ -67,8 +66,7 @@ export const login = async (req, res) => {
       const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
       res.cookie('token', token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',  
-        sameSite: 'None', 
+        secure: process.env.NODE_ENV === 'production' ? true : false,  
     });
 
       res

@@ -63,9 +63,9 @@ const useAuthStore = create((set) => ({
   },
 
   checkAuth: async () => {
-    const token = Cookie.get("token");
+    
     try {
-      if (token) {
+    
         const res = await axiosInstance.get("/auth/verify");
         const user = res.data.user;
         set({
@@ -74,15 +74,8 @@ const useAuthStore = create((set) => ({
           error: null,
           loading: false,
         });
-      } else {
-        set({
-          user: null,
-          isAuth: false,
-          error: null,
-          loading: false,
-        });
       }
-    } catch (error) {
+       catch (error) {
       toast.error(error?.response?.data?.error || "Authentication failed");
       set({
         loading: false,
